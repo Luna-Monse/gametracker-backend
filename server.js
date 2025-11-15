@@ -6,7 +6,11 @@ require('dotenv').config();
 const app = express();
 
 // Middlewares
-app.use(cors());
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'];
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 app.use(express.json());
 
 // Conexión a MongoDB
